@@ -23,7 +23,6 @@ class Front extends Controller
         $post->save();
         return view('content')->with(compact('post'));
 
-        
     }
     
 
@@ -34,8 +33,8 @@ class Front extends Controller
         Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required|regex:/(01)[0-9]{9}/',
-            'message' => 'required',
+            //'phone' => 'required|regex:/(01)[0-9]{9}/',
+            'text' => 'required'
 
         ])->validate();
         
@@ -47,8 +46,7 @@ class Front extends Controller
         $comment->email = $request->email;
         $comment->phone = $request->phone;
         $comment->post_id = $id;
-
-        
+         
 
         $comment->save();
 

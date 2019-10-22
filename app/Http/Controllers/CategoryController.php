@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Post;
 class CategoryController extends Controller
 {
     /**
@@ -94,9 +95,15 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
-       
-        $category->delete();
+        
+        $post_nr = Post::where('category_id', $id)->count();
 
+        if(!$post_nr)
+        { dd($post_nr);
+            $category->delete();
+
+        }
         return redirect()->route('categories.index');
+  
     }
 }
